@@ -1,0 +1,16 @@
+<?php
+class User_model {
+    private $table = 'users';
+    private $db;
+
+    public function __construct() {
+        require_once 'app/core/Database.php';
+        $this->db = new Database();
+    }
+
+    public function getUserByUsername($username) {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE username = :username');
+        $this->db->bind('username', $username);
+        return $this->db->single();
+    }
+}
